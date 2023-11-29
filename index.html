@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Rock Paper Scissors Game</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<header>
+		<h1>Rock Paper Scissors</h1>
+	</header>
+
+	<div class="score-board">
+		<span id="user-score">0</span> : <span id="computer-score">0</span>
+	</div>
+	<div class="result">
+		<p>Let's Play</p>
+	</div>
+
+	<div class="choices">
+		<div class="choice" onclick="playGame('rock')">
+			<img src="stone.png" alt="">
+		</div>
+		<div class="choice" onclick="playGame('paper')">
+			<img src="paper.png" alt="">
+		</div>
+		<div class="choice" onclick="playGame('scissors')">
+			<img src="scissors.png" alt="">
+		</div>
+	</div>
+
+	<script>
+		let userScore = 0;
+		let computerScore = 0;
+		const userScore_span = document.getElementById("user-score");
+		const computerScore_span = document.getElementById("computer-score");
+		const result_p = document.querySelector(".result p");
+
+		function getComputerChoice() {
+			const choices = ['rock', 'paper', 'scissors'];
+			const randomNumber = Math.floor(Math.random() * 3);
+			return choices[randomNumber];
+		}
+
+		function playGame(userChoice) {
+			const computerChoice = getComputerChoice();
+
+			if (userChoice === computerChoice) {
+				result_p.textContent = "It's a draw!";
+			} else if (
+				(userChoice === 'rock' && computerChoice === 'scissors') ||
+				(userChoice === 'paper' && computerChoice === 'rock') ||
+				(userChoice === 'scissors' && computerChoice === 'paper')
+			) {
+				userScore++;
+				result_p.textContent = "You win!";
+			} else {
+				computerScore++;
+				result_p.textContent = "Computer wins!";
+			}
+
+			userScore_span.textContent = userScore;
+			computerScore_span.textContent = computerScore;
+		}
+	</script>
+
+</body>
+
+</html>
